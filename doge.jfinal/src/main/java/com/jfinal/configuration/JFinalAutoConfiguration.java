@@ -1,7 +1,9 @@
 package com.jfinal.configuration;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  * @author: Administrator
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 @Configuration
+@ConditionalOnBean(DataSource.class)
 public class JFinalAutoConfiguration {
 
 }
