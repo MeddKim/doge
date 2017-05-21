@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,6 +20,8 @@ public class SpringContextTool implements ApplicationContextAware{
 
     public static ApplicationContext context;
 
+    private MessageSource messages;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         String[] names = applicationContext.getBeanDefinitionNames();
@@ -27,5 +30,9 @@ public class SpringContextTool implements ApplicationContextAware{
             System.out.println(name);
         }
         context = applicationContext;
+    }
+
+    public static ApplicationContext getApplicationContext() {
+        return context;
     }
 }
