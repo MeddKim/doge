@@ -10,6 +10,7 @@
   <groupId>com.doge.blog</groupId>
   <artifactId>doge.blog</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>doge.blog</name>
   <url>http://maven.apache.org</url>
   <dependencies>
