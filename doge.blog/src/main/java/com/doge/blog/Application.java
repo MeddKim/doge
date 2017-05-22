@@ -1,18 +1,17 @@
-package com;
+package com.doge.blog;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 /**
- * @author: Administrator
- * @date : 2017/5/19 0019
- * @Description:
+ * Hello world!
+ *
  */
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(Application.class, args);
+public class Application
+{
+    public static void main( String[] args )
+    {
+        ApplicationContext context = SpringApplication.run(com.Application.class, args);
         System.out.println("----------------记录bean开始--------------------");
         String[] beanNames =  context.getBeanDefinitionNames();
         System.out.println("所以beanNames个数："+beanNames.length);

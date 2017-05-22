@@ -110,8 +110,19 @@ public final class DbKit {
 	}
 	
 	static final void close(ResultSet rs, Statement st) {
-		if (rs != null) {try {rs.close();} catch (SQLException e) {throw new ActiveRecordException(e);}}
-		if (st != null) {try {st.close();} catch (SQLException e) {throw new ActiveRecordException(e);}}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				throw new ActiveRecordException(e);
+			}
+		}
+		if (st != null) {
+			try {st.close();
+			} catch (SQLException e) {
+				throw new ActiveRecordException(e);
+			}
+		}
 	}
 	
 	static final void close(Statement st) {

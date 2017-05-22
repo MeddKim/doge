@@ -1,15 +1,14 @@
-package com.app.entity;
+package com.doge.blog.entity;
 
 import com.jfinal.annotation.DataModel;
 import com.jfinal.plugin.activerecord.Model;
 
 /**
  * @author: Administrator
- * @date : 2017/5/16 0016
+ * @date : 2017/5/22 0022
  * @Description:
  */
-@DataModel
-public class SysApp extends Model<SysApp> {
-
+@DataModel(TableName = "sys_app")
+public class SysApp extends Model<SysApp>{
     public static final SysApp me = new SysApp();
 }

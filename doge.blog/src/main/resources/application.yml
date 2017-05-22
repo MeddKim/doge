@@ -23,4 +23,4 @@ spring:
 
 
 jfinal:
-    modelBasePath: com.app
+    modelBasePath: com.doge.blog.entity

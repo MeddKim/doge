@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.jfinal.configuration.JFinalAutoConfiguration
+com.spring.boot.autoconfigure.JFinalAutoConfiguration
