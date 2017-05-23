@@ -13,6 +13,6 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String admin(){
-        return "admin/dist/index.html";
+        return "admin/index.html";
     }
 }

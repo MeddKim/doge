@@ -1,7 +1,7 @@
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://118.190.74.13:3306/demo?useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://118.190.74.13:3306/doge?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: meddkim
         # 使用druid数据源
@@ -26,3 +26,7 @@ spring:
 
 jfinal:
     modelBasePath: com.doge.blog.entity
+
+
+server:
+  port: 8001
