@@ -5,15 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author: Administrator
- * @date : 2017/5/22 0022
+ * @date : 2017/5/23 0023
  * @Description:
  */
 @Controller
-public class IndexController {
+public class AdminController {
 
-    @RequestMapping("/")
-    public String index(){
-        return "/blog/index.html";
+    @RequestMapping("/admin")
+    public String admin(){
+        return "admin/dist/index.html";
     }
-
 }

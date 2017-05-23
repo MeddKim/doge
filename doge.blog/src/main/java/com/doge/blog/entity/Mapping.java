@@ -5,10 +5,10 @@ import com.jfinal.plugin.activerecord.Model;
 
 /**
  * @author: Administrator
- * @date : 2017/5/22 0022
+ * @date : 2017/5/23 0023
  * @Description:
  */
-@DataModel(TableName = "sys_app")
-public class SysApp extends Model<SysApp>{
-    public static final SysApp me = new SysApp();
+@DataModel(TableName = "blog_mapping")
+public class Mapping extends Model<Mapping> {
+    public static final Mapping me = new Mapping();
 }

@@ -37,5 +37,16 @@
       <artifactId>doge.jfinal</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    <!--
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    为了配合thymeleaf.mode=LEGACYHTML5（使用非严格的html5格式）而添加的文件
+    <dependency>
+      <groupId>net.sourceforge.nekohtml</groupId>
+      <artifactId>nekohtml</artifactId>
+      <version>1.9.22</version>
+    </dependency>-->
   </dependencies>
 </project>
