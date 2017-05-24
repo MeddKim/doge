@@ -1,7 +1,7 @@
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://118.190.74.13:3306/doge?useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://118.190.74.13:3306/demo?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: meddkim
         # 使用druid数据源
@@ -20,13 +20,9 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
-#    thymeleaf:
-#      prefix: classpath:/templates/
-#      mode: LEGACYHTML5
+
 
 jfinal:
-    modelBasePath: com.doge.blog.entity
-
-
+    modelBasePath: com.app
 server:
-  port: 8002
+  port: 8022

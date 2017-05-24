@@ -32,5 +32,6 @@
   <modules>
     <module>doge.jfinal</module>
     <module>doge.blog</module>
+    <module>doge.security</module>
   </modules>
 </project>
