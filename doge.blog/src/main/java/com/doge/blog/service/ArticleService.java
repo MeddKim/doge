@@ -1,22 +1,16 @@
 package com.doge.blog.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.doge.blog.entity.Content;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author: Administrator
- * @date : 2017/5/24 0024
+ * @date : 2017/5/25 0025
  * @Description:
  */
 @Service
 public class ArticleService {
 
-    public JSONArray findArticleList(){
-//        List<Content> contents = Content.me.find();
-        return null;
-    }
+
 }

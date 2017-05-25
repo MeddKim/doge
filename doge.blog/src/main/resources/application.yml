@@ -24,9 +24,14 @@ spring:
 #      prefix: classpath:/templates/
 #      mode: LEGACYHTML5
 
-jfinal:
-    modelBasePath: com.doge.blog.entity
-
+#jfinal:
+#    modelBasePath: com.doge.blog.entity
 
 server:
-  port: 8002
+  port: 8015
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.doge.blog.domain
+
+
+

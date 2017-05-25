@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.AttachmentMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Attachment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.doge.blog.domain.Attachment">
+    <result column="title" jdbcType="LONGVARCHAR" property="title" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, content_id, path, mime_type, suffix, type, flag, lat, lng, order_number, 
+    created
+  </sql>
+  <sql id="Blob_Column_List">
+    title
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_attachment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_attachment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Attachment">
+    insert into blog_attachment (id, user_id, content_id, 
+      path, mime_type, suffix, 
+      type, flag, lat, lng, 
+      order_number, created, title
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{contentId,jdbcType=BIGINT}, 
+      #{path,jdbcType=VARCHAR}, #{mimeType,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{lat,jdbcType=DECIMAL}, #{lng,jdbcType=DECIMAL}, 
+      #{orderNumber,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{title,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Attachment">
+    insert into blog_attachment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="mimeType != null">
+        mime_type,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="mimeType != null">
+        #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Attachment">
+    update blog_attachment
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="mimeType != null">
+        mime_type = #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doge.blog.domain.Attachment">
+    update blog_attachment
+    set user_id = #{userId,jdbcType=BIGINT},
+      content_id = #{contentId,jdbcType=BIGINT},
+      path = #{path,jdbcType=VARCHAR},
+      mime_type = #{mimeType,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lng = #{lng,jdbcType=DECIMAL},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Attachment">
+    update blog_attachment
+    set user_id = #{userId,jdbcType=BIGINT},
+      content_id = #{contentId,jdbcType=BIGINT},
+      path = #{path,jdbcType=VARCHAR},
+      mime_type = #{mimeType,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lng = #{lng,jdbcType=DECIMAL},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache />
+</mapper>

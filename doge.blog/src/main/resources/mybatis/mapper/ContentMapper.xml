@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.ContentMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Content">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="link_to" jdbcType="VARCHAR" property="linkTo" />
+    <result column="markdown_enable" jdbcType="BIT" property="markdownEnable" />
+    <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_ip" jdbcType="VARCHAR" property="userIp" />
+    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="object_id" jdbcType="BIGINT" property="objectId" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="vote_up" jdbcType="INTEGER" property="voteUp" />
+    <result column="vote_down" jdbcType="INTEGER" property="voteDown" />
+    <result column="rate" jdbcType="INTEGER" property="rate" />
+    <result column="rate_count" jdbcType="INTEGER" property="rateCount" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="comment_status" jdbcType="VARCHAR" property="commentStatus" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="meta_keywords" jdbcType="VARCHAR" property="metaKeywords" />
+    <result column="meta_description" jdbcType="VARCHAR" property="metaDescription" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  
+  <resultMap id="contentTaxoMapping" type="com.doge.blog.domain.Content" extends="BaseResultMap">
+    <collection property="mappings" ofType="Mapping">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="content_id" jdbcType="BIGINT" property="contentId" />
+      <result column="taxonomy_id" jdbcType="BIGINT" property="taxonomyId" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, title, text, summary, link_to, markdown_enable, thumbnail, module, style, user_id, 
+    author, user_email, user_ip, user_agent, parent_id, object_id, order_number, status, 
+    vote_up, vote_down, rate, rate_count, price, comment_status, comment_count, comment_time, 
+    view_count, created, modified, slug, flag, lng, lat, meta_keywords, meta_description, 
+    remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_content
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_content
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Content">
+    insert into blog_content (id, title, text, 
+      summary, link_to, markdown_enable, 
+      thumbnail, module, style, 
+      user_id, author, user_email, 
+      user_ip, user_agent, parent_id, 
+      object_id, order_number, status, 
+      vote_up, vote_down, rate, 
+      rate_count, price, comment_status, 
+      comment_count, comment_time, view_count, 
+      created, modified, slug, 
+      flag, lng, lat, meta_keywords, 
+      meta_description, remarks)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{linkTo,jdbcType=VARCHAR}, #{markdownEnable,jdbcType=BIT}, 
+      #{thumbnail,jdbcType=VARCHAR}, #{module,jdbcType=VARCHAR}, #{style,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{author,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userIp,jdbcType=VARCHAR}, #{userAgent,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{objectId,jdbcType=BIGINT}, #{orderNumber,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{voteUp,jdbcType=INTEGER}, #{voteDown,jdbcType=INTEGER}, #{rate,jdbcType=INTEGER}, 
+      #{rateCount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{commentStatus,jdbcType=VARCHAR}, 
+      #{commentCount,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}, #{viewCount,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, #{slug,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{metaKeywords,jdbcType=VARCHAR}, 
+      #{metaDescription,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Content">
+    insert into blog_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="linkTo != null">
+        link_to,
+      </if>
+      <if test="markdownEnable != null">
+        markdown_enable,
+      </if>
+      <if test="thumbnail != null">
+        thumbnail,
+      </if>
+      <if test="module != null">
+        module,
+      </if>
+      <if test="style != null">
+        style,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userIp != null">
+        user_ip,
+      </if>
+      <if test="userAgent != null">
+        user_agent,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="objectId != null">
+        object_id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="voteUp != null">
+        vote_up,
+      </if>
+      <if test="voteDown != null">
+        vote_down,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="rateCount != null">
+        rate_count,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="commentTime != null">
+        comment_time,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="slug != null">
+        slug,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="metaKeywords != null">
+        meta_keywords,
+      </if>
+      <if test="metaDescription != null">
+        meta_description,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTo != null">
+        #{linkTo,jdbcType=VARCHAR},
+      </if>
+      <if test="markdownEnable != null">
+        #{markdownEnable,jdbcType=BIT},
+      </if>
+      <if test="thumbnail != null">
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null">
+        #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null">
+        #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="voteUp != null">
+        #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null">
+        #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="rateCount != null">
+        #{rateCount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slug != null">
+        #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="metaKeywords != null">
+        #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Content">
+    update blog_content
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTo != null">
+        link_to = #{linkTo,jdbcType=VARCHAR},
+      </if>
+      <if test="markdownEnable != null">
+        markdown_enable = #{markdownEnable,jdbcType=BIT},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null">
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null">
+        user_agent = #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="objectId != null">
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="voteUp != null">
+        vote_up = #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null">
+        vote_down = #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="rateCount != null">
+        rate_count = #{rateCount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentTime != null">
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slug != null">
+        slug = #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="metaKeywords != null">
+        meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        meta_description = #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Content">
+    update blog_content
+    set title = #{title,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      link_to = #{linkTo,jdbcType=VARCHAR},
+      markdown_enable = #{markdownEnable,jdbcType=BIT},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      author = #{author,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      user_agent = #{userAgent,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      object_id = #{objectId,jdbcType=BIGINT},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      vote_up = #{voteUp,jdbcType=INTEGER},
+      vote_down = #{voteDown,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=INTEGER},
+      rate_count = #{rateCount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      comment_status = #{commentStatus,jdbcType=VARCHAR},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      slug = #{slug,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=DECIMAL},
+      lat = #{lat,jdbcType=DECIMAL},
+      meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      meta_description = #{metaDescription,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectContentMappingById" parameterType="java.lang.Long" resultMap="contentTaxoMapping">
+    SELECT bc.id, bc.title, bc.text, bc.summary, bc.link_to, bc.markdown_enable, bc.thumbnail, bc.module, bc.style, bc.user_id,
+    bc.author, bc.user_email, bc.user_ip, bc.user_agent, bc.parent_id, bc.object_id, bc.order_number, bc.status,
+    bc.vote_up, bc.vote_down, bc.rate, bc.rate_count, bc.price, bc.comment_status, bc.comment_count, bc.comment_time,
+    bc.view_count, bc.created, bc.modified, bc.slug, bc.flag, bc.lng, bc.lat, bc.meta_keywords, bc.meta_description,
+    bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
+    WHREE bm.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectContentMappingById" parameterType="java.lang.Long" resultMap="contentTaxoMapping">
+    SELECT bc.id, bc.title, bc.text, bc.summary, bc.link_to, bc.markdown_enable, bc.thumbnail, bc.module, bc.style, bc.user_id,
+    bc.author, bc.user_email, bc.user_ip, bc.user_agent, bc.parent_id, bc.object_id, bc.order_number, bc.status,
+    bc.vote_up, bc.vote_down, bc.rate, bc.rate_count, bc.price, bc.comment_status, bc.comment_count, bc.comment_time,
+    bc.view_count, bc.created, bc.modified, bc.slug, bc.flag, bc.lng, bc.lat, bc.meta_keywords, bc.meta_description,
+    bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
+    WHREE bm.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <cache />
+</mapper>

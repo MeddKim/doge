@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.TaxonomyMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Taxonomy">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="content_module" jdbcType="VARCHAR" property="contentModule" />
+    <result column="content_count" jdbcType="INTEGER" property="contentCount" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="object_id" jdbcType="BIGINT" property="objectId" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="meta_keywords" jdbcType="VARCHAR" property="metaKeywords" />
+    <result column="meta_description" jdbcType="VARCHAR" property="metaDescription" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.doge.blog.domain.Taxonomy">
+    <result column="text" jdbcType="LONGVARCHAR" property="text" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, slug, type, icon, content_module, content_count, order_number, parent_id, 
+    object_id, flag, lat, lng, meta_keywords, meta_description, created
+  </sql>
+  <sql id="Blob_Column_List">
+    text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_taxonomy
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_taxonomy
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Taxonomy">
+    insert into blog_taxonomy (id, title, slug, 
+      type, icon, content_module, 
+      content_count, order_number, parent_id, 
+      object_id, flag, lat, 
+      lng, meta_keywords, meta_description, 
+      created, text)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{slug,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{contentModule,jdbcType=VARCHAR}, 
+      #{contentCount,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT}, 
+      #{objectId,jdbcType=BIGINT}, #{flag,jdbcType=VARCHAR}, #{lat,jdbcType=DECIMAL}, 
+      #{lng,jdbcType=DECIMAL}, #{metaKeywords,jdbcType=VARCHAR}, #{metaDescription,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{text,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Taxonomy">
+    insert into blog_taxonomy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="slug != null">
+        slug,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="contentModule != null">
+        content_module,
+      </if>
+      <if test="contentCount != null">
+        content_count,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="objectId != null">
+        object_id,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="metaKeywords != null">
+        meta_keywords,
+      </if>
+      <if test="metaDescription != null">
+        meta_description,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slug != null">
+        #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="contentModule != null">
+        #{contentModule,jdbcType=VARCHAR},
+      </if>
+      <if test="contentCount != null">
+        #{contentCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="metaKeywords != null">
+        #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Taxonomy">
+    update blog_taxonomy
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slug != null">
+        slug = #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="contentModule != null">
+        content_module = #{contentModule,jdbcType=VARCHAR},
+      </if>
+      <if test="contentCount != null">
+        content_count = #{contentCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="objectId != null">
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="metaKeywords != null">
+        meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        meta_description = #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="text != null">
+        text = #{text,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doge.blog.domain.Taxonomy">
+    update blog_taxonomy
+    set title = #{title,jdbcType=VARCHAR},
+      slug = #{slug,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      content_module = #{contentModule,jdbcType=VARCHAR},
+      content_count = #{contentCount,jdbcType=INTEGER},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      object_id = #{objectId,jdbcType=BIGINT},
+      flag = #{flag,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lng = #{lng,jdbcType=DECIMAL},
+      meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      meta_description = #{metaDescription,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      text = #{text,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Taxonomy">
+    update blog_taxonomy
+    set title = #{title,jdbcType=VARCHAR},
+      slug = #{slug,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      content_module = #{contentModule,jdbcType=VARCHAR},
+      content_count = #{contentCount,jdbcType=INTEGER},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      object_id = #{objectId,jdbcType=BIGINT},
+      flag = #{flag,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lng = #{lng,jdbcType=DECIMAL},
+      meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+      meta_description = #{metaDescription,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache />
+</mapper>

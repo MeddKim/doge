@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.MappingMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Mapping">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="taxonomy_id" jdbcType="BIGINT" property="taxonomyId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content_id, taxonomy_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Mapping">
+    insert into blog_mapping (id, content_id, taxonomy_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{contentId,jdbcType=BIGINT}, #{taxonomyId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Mapping">
+    insert into blog_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="taxonomyId != null">
+        taxonomy_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="taxonomyId != null">
+        #{taxonomyId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Mapping">
+    update blog_mapping
+    <set>
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="taxonomyId != null">
+        taxonomy_id = #{taxonomyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Mapping">
+    update blog_mapping
+    set content_id = #{contentId,jdbcType=BIGINT},
+      taxonomy_id = #{taxonomyId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache />
+</mapper>

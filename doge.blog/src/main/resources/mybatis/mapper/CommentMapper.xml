@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="content_module" jdbcType="VARCHAR" property="contentModule" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="agent" jdbcType="VARCHAR" property="agent" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="vote_up" jdbcType="INTEGER" property="voteUp" />
+    <result column="vote_down" jdbcType="INTEGER" property="voteDown" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, content_id, content_module, comment_count, order_number, user_id, 
+    ip, author, type, text, agent, created, slug, email, status, vote_up, vote_down, 
+    flag, lat, lng
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Comment">
+    insert into blog_comment (id, parent_id, content_id, 
+      content_module, comment_count, order_number, 
+      user_id, ip, author, 
+      type, text, agent, 
+      created, slug, email, 
+      status, vote_up, vote_down, 
+      flag, lat, lng)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{contentId,jdbcType=BIGINT}, 
+      #{contentModule,jdbcType=VARCHAR}, #{commentCount,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, 
+      #{userId,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{slug,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{voteUp,jdbcType=INTEGER}, #{voteDown,jdbcType=INTEGER}, 
+      #{flag,jdbcType=VARCHAR}, #{lat,jdbcType=DECIMAL}, #{lng,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Comment">
+    insert into blog_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="contentModule != null">
+        content_module,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="text != null">
+        text,
+      </if>
+      <if test="agent != null">
+        agent,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="slug != null">
+        slug,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="voteUp != null">
+        vote_up,
+      </if>
+      <if test="voteDown != null">
+        vote_down,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="contentModule != null">
+        #{contentModule,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slug != null">
+        #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="voteUp != null">
+        #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null">
+        #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Comment">
+    update blog_comment
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="contentModule != null">
+        content_module = #{contentModule,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        agent = #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slug != null">
+        slug = #{slug,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="voteUp != null">
+        vote_up = #{voteUp,jdbcType=INTEGER},
+      </if>
+      <if test="voteDown != null">
+        vote_down = #{voteDown,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Comment">
+    update blog_comment
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      content_id = #{contentId,jdbcType=BIGINT},
+      content_module = #{contentModule,jdbcType=VARCHAR},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      agent = #{agent,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      slug = #{slug,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      vote_up = #{voteUp,jdbcType=INTEGER},
+      vote_down = #{voteDown,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lng = #{lng,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache />
+</mapper>

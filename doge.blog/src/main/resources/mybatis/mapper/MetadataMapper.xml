@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doge.blog.mapper.MetadataMapper">
+  <resultMap id="BaseResultMap" type="com.doge.blog.domain.Metadata">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="meta_key" jdbcType="VARCHAR" property="metaKey" />
+    <result column="object_type" jdbcType="VARCHAR" property="objectType" />
+    <result column="object_id" jdbcType="BIGINT" property="objectId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.doge.blog.domain.Metadata">
+    <result column="meta_value" jdbcType="LONGVARCHAR" property="metaValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meta_key, object_type, object_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_metadata
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog_metadata
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.doge.blog.domain.Metadata">
+    insert into blog_metadata (id, meta_key, object_type, 
+      object_id, meta_value)
+    values (#{id,jdbcType=BIGINT}, #{metaKey,jdbcType=VARCHAR}, #{objectType,jdbcType=VARCHAR}, 
+      #{objectId,jdbcType=BIGINT}, #{metaValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doge.blog.domain.Metadata">
+    insert into blog_metadata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="metaKey != null">
+        meta_key,
+      </if>
+      <if test="objectType != null">
+        object_type,
+      </if>
+      <if test="objectId != null">
+        object_id,
+      </if>
+      <if test="metaValue != null">
+        meta_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="metaKey != null">
+        #{metaKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null">
+        #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="metaValue != null">
+        #{metaValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doge.blog.domain.Metadata">
+    update blog_metadata
+    <set>
+      <if test="metaKey != null">
+        meta_key = #{metaKey,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null">
+        object_type = #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null">
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="metaValue != null">
+        meta_value = #{metaValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doge.blog.domain.Metadata">
+    update blog_metadata
+    set meta_key = #{metaKey,jdbcType=VARCHAR},
+      object_type = #{objectType,jdbcType=VARCHAR},
+      object_id = #{objectId,jdbcType=BIGINT},
+      meta_value = #{metaValue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Metadata">
+    update blog_metadata
+    set meta_key = #{metaKey,jdbcType=VARCHAR},
+      object_type = #{objectType,jdbcType=VARCHAR},
+      object_id = #{objectId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache />
+</mapper>

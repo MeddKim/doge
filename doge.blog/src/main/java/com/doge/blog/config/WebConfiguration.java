@@ -1,16 +1,8 @@
 package com.doge.blog.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceView;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * @author: Meddkim
@@ -21,21 +13,21 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     /**
-    @Bean
-    public InternalResourceViewResolver resolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setViewClass();
-//        resolver.setPrefix("templates/");
-        resolver.setSuffix(".html");
-        return resolver;
-    }
+     @Bean
+     public InternalResourceViewResolver resolver(){
+     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+     //        resolver.setViewClass();
+     //        resolver.setPrefix("templates/");
+     resolver.setSuffix(".html");
+     return resolver;
+     }
 
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-    **/
+     @Override
+     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+     configurer.enable();
+     }
+     **/
 
 
     /**
@@ -53,9 +45,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/"); //访问 localhost:8080/templates/admin/index.html
         registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
-        registry.addResourceHandler("/static/*/**").addResourceLocations("classpath:/template/admin/static/");
         super.addResourceHandlers(registry);
     }
 }
-
 
