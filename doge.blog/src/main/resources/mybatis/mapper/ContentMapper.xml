@@ -41,8 +41,9 @@
   </resultMap>
   
   <resultMap id="contentTaxoMapping" type="com.doge.blog.domain.Content" extends="BaseResultMap">
-    <collection property="mappings" ofType="Mapping">
-      <id column="id" jdbcType="BIGINT" property="id" />
+    <collection property="mappings" ofType="com.doge.blog.domain.Mapping">
+      <!--添加下面的属性后就值查到一个值了，很奇怪-->
+      <!--<id column="id" jdbcType="BIGINT" property="id" />-->
       <result column="content_id" jdbcType="BIGINT" property="contentId" />
       <result column="taxonomy_id" jdbcType="BIGINT" property="taxonomyId" />
     </collection>
@@ -471,16 +472,15 @@
     bc.vote_up, bc.vote_down, bc.rate, bc.rate_count, bc.price, bc.comment_status, bc.comment_count, bc.comment_time,
     bc.view_count, bc.created, bc.modified, bc.slug, bc.flag, bc.lng, bc.lat, bc.meta_keywords, bc.meta_description,
     bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
-    WHREE bm.id = #{id,jdbcType=BIGINT}
+    WHERE bc.id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectContentMappingById" parameterType="java.lang.Long" resultMap="contentTaxoMapping">
+  <select id="selectContentList" resultMap="contentTaxoMapping">
     SELECT bc.id, bc.title, bc.text, bc.summary, bc.link_to, bc.markdown_enable, bc.thumbnail, bc.module, bc.style, bc.user_id,
     bc.author, bc.user_email, bc.user_ip, bc.user_agent, bc.parent_id, bc.object_id, bc.order_number, bc.status,
     bc.vote_up, bc.vote_down, bc.rate, bc.rate_count, bc.price, bc.comment_status, bc.comment_count, bc.comment_time,
     bc.view_count, bc.created, bc.modified, bc.slug, bc.flag, bc.lng, bc.lat, bc.meta_keywords, bc.meta_description,
     bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
-    WHREE bm.id = #{id,jdbcType=BIGINT}
   </select>
 
   <cache />

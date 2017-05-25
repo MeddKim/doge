@@ -1,4 +1,5 @@
 import com.doge.blog.domain.Content;
+import com.doge.blog.domain.Mapping;
 import com.doge.blog.mapper.ContentMapper;
 import com.doge.blog.mapper.anno.ComtentMapper2;
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @author: Administrator
@@ -56,8 +59,27 @@ public class BootTest {
 //        }
         //上面的代码错误，在spring中，我们无需手动关闭SqlSession，关闭操作由Spring替我们完成
         ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-//        Content content = contentMapper.selectContentMappingById(1L);
-        Content content = contentMapper.selectOnkey(1L);
-        System.out.println(content.getText());
+        Content content = contentMapper.selectContentMappingById(1L);
+        System.out.println(content.getMappings().size());
+
+        for(Mapping mp : content.getMappings()){
+            System.out.println(mp.getTaxonomyId());
+        }
+    }
+
+    @Test
+    public void test4(){
+//        try{
+//            ContentMapper contentMaper = session.getMapper(ContentMapper.class);
+//            Content content = contentMapper.selectByPrimaryKey(1L);
+//            System.out.println(content.getTitle());
+//        }finally {
+//            session.close();
+//        }
+        //上面的代码错误，在spring中，我们无需手动关闭SqlSession，关闭操作由Spring替我们完成
+        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
+        List<Content> contents = contentMapper.selectContentList();
+        System.out.println(contents.size());
+        System.out.println(contents.get(0).getMappings().size());
     }
 }

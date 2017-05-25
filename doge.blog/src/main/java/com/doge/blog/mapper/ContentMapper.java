@@ -2,6 +2,8 @@ package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Content;
 
+import java.util.List;
+
 public interface ContentMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -17,5 +19,5 @@ public interface ContentMapper {
 
     Content selectContentMappingById(Long id);
 
-
+    List<Content> selectContentList();
 }
