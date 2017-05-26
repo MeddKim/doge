@@ -483,5 +483,6 @@
     bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
   </select>
 
+
   <cache />
 </mapper>

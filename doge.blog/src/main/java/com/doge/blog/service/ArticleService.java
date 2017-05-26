@@ -14,6 +14,11 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    //查询日志列表
+    //查询文章列表
     List<Content> findContentPage();
+
+    //保存文章
+    Boolean saveContent(Content content);
+
+    Content findContentById(Long id);
 }

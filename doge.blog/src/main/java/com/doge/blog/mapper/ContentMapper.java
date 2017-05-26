@@ -20,4 +20,5 @@ public interface ContentMapper {
     Content selectContentMappingById(Long id);
 
     List<Content> selectContentList();
+
 }

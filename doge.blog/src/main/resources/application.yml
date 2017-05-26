@@ -32,6 +32,7 @@ server:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.doge.blog.domain
+  config-location: classpath:mybatis/mybatis-config.xml
 
 
 
