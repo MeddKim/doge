@@ -2,6 +2,8 @@ import com.doge.blog.domain.Content;
 import com.doge.blog.domain.Mapping;
 import com.doge.blog.mapper.ContentMapper;
 import com.doge.blog.mapper.anno.ComtentMapper2;
+import com.doge.blog.service.ArticleService;
+import com.doge.blog.service.impl.ArticleServiceImpl;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,7 @@ import java.util.List;
  * @Description:
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = com.doge.blog.Application.class)
+@SpringBootTest(classes = com.doge.blog.BlogApplication.class)
 //@Import(Application.class)
 public class BootTest {
 
@@ -26,6 +28,10 @@ public class BootTest {
 
     @Autowired
     private ComtentMapper2 contentMapper2;
+
+//    @Autowired
+//    private ArticleServiceImpl articleService;
+
 
     @Test
     public void test(){
@@ -69,16 +75,16 @@ public class BootTest {
 
     @Test
     public void test4(){
-//        try{
-//            ContentMapper contentMaper = session.getMapper(ContentMapper.class);
-//            Content content = contentMapper.selectByPrimaryKey(1L);
-//            System.out.println(content.getTitle());
-//        }finally {
-//            session.close();
-//        }
-        //上面的代码错误，在spring中，我们无需手动关闭SqlSession，关闭操作由Spring替我们完成
         ContentMapper contentMapper = session.getMapper(ContentMapper.class);
         List<Content> contents = contentMapper.selectContentList();
+        System.out.println(contents.size());
+        System.out.println(contents.get(0).getMappings().size());
+    }
+
+    @Test
+    public void test5(){
+        ArticleService articleService = new ArticleServiceImpl();
+        List<Content> contents = articleService.findContentPage();
         System.out.println(contents.size());
         System.out.println(contents.get(0).getMappings().size());
     }
