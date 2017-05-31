@@ -1,6 +1,8 @@
 package com.doge.blog.config;
 
+import com.doge.blog.interceptor.SpringMvcInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -45,7 +47,14 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/"); //访问 localhost:8080/templates/admin/index.html
         registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
+//        registry.addResourceHandler("/static/**/*").addResourceLocations("classpath:/templates/admin/static");
         super.addResourceHandlers(registry);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(new SpringMvcInterceptor()).addPathPatterns("/**");
+                //.excludePathPatterns();指定无需拦截的
     }
 }
 

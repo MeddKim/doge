@@ -13,6 +13,11 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(){
-        return "index";
+        return "blog/index.html";
+    }
+
+    @RequestMapping("/admin")
+    public String adminIndex(){
+        return "admin/index.html";
     }
 }

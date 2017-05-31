@@ -2,18 +2,17 @@ package com.doge.blog.controller;
 
 import com.doge.blog.domain.Content;
 import com.doge.blog.domain.User;
-import com.doge.blog.service.ArticleService;
 import com.doge.blog.service.impl.ArticleServiceImpl;
+import com.doge.blog.utils.ResultMapUtils;
 import com.doge.blog.utils.RuntimeContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Administrator
@@ -31,20 +30,38 @@ public class ArticleController {
     HttpServletRequest request;
 
     @RequestMapping(value = "/contents",method = RequestMethod.GET)
-    public List<Content> findContents(){
-        System.out.println(Thread.currentThread().getId()+":"+Thread.currentThread().getName());
-        System.out.println(RuntimeContext.currentUser());
+    public Map findContents(){
         List<Content> contents = articleService.findContentPage();
-        return contents;
+
+        return ResultMapUtils.successResult(contents);
     }
 
     @RequestMapping(value="/content/{contentId}",method = RequestMethod.GET)
-    public Content saveContent(@PathVariable Long contentId){
+    public Content findContent(@PathVariable Long contentId){
 
-        if(contentId != null){
+        if(contentId == null){
             return null;
         }else{
             return articleService.findContentById(contentId);
         }
+    }
+
+    @RequestMapping(value = "/content",method = RequestMethod.POST)
+    public boolean saveContent(){
+        return false;
+    }
+
+    @RequestMapping(value="/test")
+    public Map<String,Object> test(){
+        Map map = new HashMap();
+        map.put("code",200);
+        User user = new User();
+        user.setUsername("张三");
+        user.setPassword("李四");
+        List<User> list = new ArrayList<User>();
+        list.add(user);
+        list.add(user);
+        map.put("data",list);
+        return map;
     }
 }
