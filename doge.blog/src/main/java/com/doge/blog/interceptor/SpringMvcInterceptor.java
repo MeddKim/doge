@@ -20,6 +20,10 @@ public class SpringMvcInterceptor implements HandlerInterceptor{
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        /***
+         * 支持跨域，请在发布版本中取消该拦截器
+         */
+//        response.setHeader("Access-Control-Allow-Origin","*");
         return true;
     }
 

@@ -1,6 +1,7 @@
 package com.doge.blog.controller;
 
 import com.doge.blog.domain.Content;
+import com.doge.blog.domain.Taxonomy;
 import com.doge.blog.domain.User;
 import com.doge.blog.service.impl.ArticleServiceImpl;
 import com.doge.blog.utils.ResultMapUtils;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: Administrator
@@ -38,11 +36,13 @@ public class ArticleController {
 
     @RequestMapping(value="/content/{contentId}",method = RequestMethod.GET)
     public Content findContent(@PathVariable Long contentId){
-
         if(contentId == null){
             return null;
         }else{
-            return articleService.findContentById(contentId);
+            Content content = articleService.findContentById(contentId);
+            Date date  = content.getCreated();
+            System.out.println(date.toString());
+            return content;
         }
     }
 
@@ -50,6 +50,18 @@ public class ArticleController {
     public boolean saveContent(){
         return false;
     }
+
+
+    @RequestMapping(value = "/taxos",method = RequestMethod.GET)
+    public Map findTaxos(){
+
+        List<Taxonomy> taxonomies = null;
+
+        return null;
+    }
+
+
+
 
     @RequestMapping(value="/test")
     public Map<String,Object> test(){

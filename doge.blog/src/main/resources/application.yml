@@ -20,6 +20,9 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss # Date类型数据输出时的根式转换
+      time-zone: GMT+8 # 指定时区
 #    thymeleaf:
 #      prefix: classpath:/templates/
 #      mode: LEGACYHTML5
@@ -33,6 +36,5 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.doge.blog.domain
   config-location: classpath:mybatis/mybatis-config.xml
-
 
 
