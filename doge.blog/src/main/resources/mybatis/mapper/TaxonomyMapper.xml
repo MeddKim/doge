@@ -257,5 +257,12 @@
       created = #{created,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--一下为手工sql-->
+  <select id="selectTaxoList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM blog_taxonomy
+  </select>
   <cache />
 </mapper>

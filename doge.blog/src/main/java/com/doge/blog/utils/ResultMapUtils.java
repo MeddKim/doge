@@ -12,19 +12,19 @@ import java.util.Objects;
 public class ResultMapUtils {
 
     public interface HTTPSTATUS{
-        int SUCCESS = 200;
+
     }
 
     public static Map successResult(Object obj){
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("code",HTTPSTATUS.SUCCESS);
+        resultMap.put("code",HttpCode.SUCCESS);
         resultMap.put("data",obj);
         return resultMap;
     }
 
-    public static Map errorResult(Object obj){
+    public static Map errorResult(int code,Object obj){
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("code",HTTPSTATUS.SUCCESS);
+        resultMap.put("code",code);
         resultMap.put("message",obj);
         return resultMap;
     }

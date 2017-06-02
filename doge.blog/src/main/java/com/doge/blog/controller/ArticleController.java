@@ -4,6 +4,8 @@ import com.doge.blog.domain.Content;
 import com.doge.blog.domain.Taxonomy;
 import com.doge.blog.domain.User;
 import com.doge.blog.service.impl.ArticleServiceImpl;
+import com.doge.blog.service.impl.TaxoServiceImpl;
+import com.doge.blog.utils.HttpCode;
 import com.doge.blog.utils.ResultMapUtils;
 import com.doge.blog.utils.RuntimeContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class ArticleController {
 
     @Autowired
     private ArticleServiceImpl articleService;
+    @Autowired
+    private TaxoServiceImpl taxoService;
 
     @Autowired
     HttpServletRequest request;
@@ -55,9 +59,13 @@ public class ArticleController {
     @RequestMapping(value = "/taxos",method = RequestMethod.GET)
     public Map findTaxos(){
 
-        List<Taxonomy> taxonomies = null;
+        List<Taxonomy> taxonomies = taxoService.findTaxos();
 
-        return null;
+        if(null == taxonomies || 0 == taxonomies.size()){
+            return ResultMapUtils.errorResult(HttpCode.NOTFOUND,"未找到资源");
+        }
+
+        return ResultMapUtils.successResult(taxonomies);
     }
 
 

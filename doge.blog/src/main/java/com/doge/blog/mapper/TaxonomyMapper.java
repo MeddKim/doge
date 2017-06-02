@@ -2,6 +2,8 @@ package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Taxonomy;
 
+import java.util.List;
+
 public interface TaxonomyMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface TaxonomyMapper {
     int updateByPrimaryKeyWithBLOBs(Taxonomy record);
 
     int updateByPrimaryKey(Taxonomy record);
+
+    List<Taxonomy> selectTaxoList();
 }

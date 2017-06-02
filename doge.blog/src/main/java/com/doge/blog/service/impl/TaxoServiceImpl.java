@@ -1,12 +1,11 @@
 package com.doge.blog.service.impl;
 
-import com.doge.blog.domain.Content;
 import com.doge.blog.domain.Taxonomy;
-import com.doge.blog.mapper.ContentMapper;
 import com.doge.blog.mapper.TaxonomyMapper;
 import com.doge.blog.service.TaxoService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
  * @date : 2017/6/1 0001
  * @Description:
  */
+@Service
 public class TaxoServiceImpl implements TaxoService{
 
     @Autowired
@@ -22,8 +22,8 @@ public class TaxoServiceImpl implements TaxoService{
 
     @Override
     public List<Taxonomy> findTaxos() {
-        TaxonomyMapper contentMapper = session.getMapper(TaxonomyMapper.class);
-//        List<Taxonomy> contents = contentMapper.selectContentList();
-        return null;
+        TaxonomyMapper taxoMapper = session.getMapper(TaxonomyMapper.class);
+        List<Taxonomy> contents = taxoMapper.selectTaxoList();
+        return contents;
     }
 }
