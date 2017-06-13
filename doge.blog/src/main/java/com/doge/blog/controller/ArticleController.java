@@ -8,6 +8,8 @@ import com.doge.blog.service.impl.TaxoServiceImpl;
 import com.doge.blog.utils.HttpCode;
 import com.doge.blog.utils.ResultMapUtils;
 import com.doge.blog.utils.RuntimeContext;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,8 @@ public class ArticleController {
     @Autowired
     HttpServletRequest request;
 
+    @ApiOperation(value = "获取所有的文章",notes = "无过滤，无分页")
+    @ApiImplicitParam(name="null",value = "测试")
     @RequestMapping(value = "/contents",method = RequestMethod.GET)
     public Map findContents(){
         List<Content> contents = articleService.findContentPage();

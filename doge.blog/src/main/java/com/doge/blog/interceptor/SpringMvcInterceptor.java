@@ -23,7 +23,9 @@ public class SpringMvcInterceptor implements HandlerInterceptor{
         /***
          * 支持跨域，请在发布版本中取消该拦截器
          */
-//        response.setHeader("Access-Control-Allow-Origin","*");
+        String url = request.getRequestURI();
+        String host = request.getRemoteHost();
+        response.setHeader("Access-Control-Allow-Origin","*");
         return true;
     }
 
