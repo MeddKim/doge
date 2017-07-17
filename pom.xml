@@ -34,5 +34,6 @@
     <module>doge.blog</module>
     <module>doge.security</module>
     <module>doge.api</module>
+    <module>doge.file</module>
   </modules>
 </project>

@@ -2,7 +2,7 @@
  * Copyright (c) 2011-2017, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this fileupload except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -50,14 +50,14 @@ public class Sqls {
 	
 	public static String get(String sqlKey) {
 		if (prop == null)
-			throw new IllegalStateException("Init sql propties file by invoking Sqls.load(String fileName) method first.");
+			throw new IllegalStateException("Init sql propties fileupload by invoking Sqls.load(String fileName) method first.");
 		return prop.get(sqlKey);
 	}
 	
 	public static String get(String slqFileName, String sqlKey) {
 		Prop prop = map.get(slqFileName);
 		if (prop == null)
-			throw new IllegalStateException("Init sql propties file by invoking Sqls.load(String fileName) method first.");
+			throw new IllegalStateException("Init sql propties fileupload by invoking Sqls.load(String fileName) method first.");
 		return prop.get(sqlKey);
 	}
 	

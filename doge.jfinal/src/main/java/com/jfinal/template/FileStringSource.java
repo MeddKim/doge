@@ -2,7 +2,7 @@
  * Copyright (c) 2011-2017, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this fileupload except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -125,7 +125,7 @@ public class FileStringSource implements IStringSource {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("File name: ").append(fileName).append("\n");
-		sb.append("Final file name: ").append(finalFileName).append("\n");
+		sb.append("Final fileupload name: ").append(finalFileName).append("\n");
 		sb.append("Last modified: ").append(lastModified).append("\n");
 		return sb.toString();
 	}

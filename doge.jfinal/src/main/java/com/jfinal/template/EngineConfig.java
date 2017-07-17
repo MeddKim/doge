@@ -2,7 +2,7 @@
  * Copyright (c) 2011-2017, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this fileupload except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -67,7 +67,7 @@ public class EngineConfig {
 	}
 	
 	/**
-	 * Add shared function with file
+	 * Add shared function with fileupload
 	 */
 	public void addSharedFunction(String fileName) {
 		FileStringSource fileStringSource = new FileStringSource(baseTemplatePath, fileName, encoding);

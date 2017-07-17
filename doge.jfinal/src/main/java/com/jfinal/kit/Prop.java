@@ -2,7 +2,7 @@
  * Copyright (c) 2011-2017, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this fileupload except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Prop. Prop can load properties file from CLASSPATH or File object.
+ * Prop. Prop can load properties fileupload from CLASSPATH or File object.
  */
 public class Prop {
 	
@@ -53,7 +53,7 @@ public class Prop {
 	 * prop = new Prop("com/jfinal/file_in_sub_path_of_classpath.txt", "UTF-8");<br>
 	 * String value = prop.get("key");
 	 * 
-	 * @param fileName the properties file's name in classpath or the sub directory of classpath
+	 * @param fileName the properties fileupload's name in classpath or the sub directory of classpath
 	 * @param encoding the encoding
 	 */
 	public Prop(String fileName, String encoding) {
@@ -61,12 +61,12 @@ public class Prop {
 		try {
 			inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);		// properties.load(Prop.class.getResourceAsStream(fileName));
 			if (inputStream == null) {
-				throw new IllegalArgumentException("Properties file not found in classpath: " + fileName);
+				throw new IllegalArgumentException("Properties fileupload not found in classpath: " + fileName);
 			}
 			properties = new Properties();
 			properties.load(new InputStreamReader(inputStream, encoding));
 		} catch (IOException e) {
-			throw new RuntimeException("Error loading properties file.", e);
+			throw new RuntimeException("Error loading properties fileupload.", e);
 		}
 		finally {
 			if (inputStream != null) try {inputStream.close();} catch (IOException e) {log.error(e.getMessage(), e);}
@@ -105,7 +105,7 @@ public class Prop {
 			properties = new Properties();
 			properties.load(new InputStreamReader(inputStream, encoding));
 		} catch (IOException e) {
-			throw new RuntimeException("Error loading properties file.", e);
+			throw new RuntimeException("Error loading properties fileupload.", e);
 		}
 		finally {
 			if (inputStream != null) try {inputStream.close();} catch (IOException e) {log.error(e.getMessage(), e);}

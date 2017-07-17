@@ -2,7 +2,7 @@
  * Copyright (c) 2011-2017, James Zhan 詹波 (jfinal@126.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this fileupload except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
@@ -118,7 +118,7 @@ public class Engine {
 	}
 	
 	/**
-	 * Get template with file name
+	 * Get template with fileupload name
 	 */
 	public Template getTemplate(String fileName) {
 		if (fileName.charAt(0) != '/') {
@@ -201,7 +201,7 @@ public class Engine {
 	}
 	
 	/**
-	 * Add shared function with file
+	 * Add shared function with fileupload
 	 */
 	public Engine addSharedFunction(String fileName) {
 		config.addSharedFunction(fileName);
