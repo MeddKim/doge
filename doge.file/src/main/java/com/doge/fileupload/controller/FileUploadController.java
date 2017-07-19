@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -15,16 +16,18 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author: Administrator
  * @date : 2017/7/17 0017
  * @Description:
  */
-@Controller
+@RestController
 //public class FileUploadController implements ServletContextAware{
 public class FileUploadController {
 
@@ -41,7 +44,6 @@ public class FileUploadController {
 //    }
 
     @RequestMapping(value = "/file/upload",method = RequestMethod.POST)
-    @ResponseBody
     public void upload(HttpServletRequest request) throws IOException{
         request.setCharacterEncoding("utf8");
 
