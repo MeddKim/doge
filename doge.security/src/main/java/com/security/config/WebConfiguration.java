@@ -41,12 +41,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
      * 使用，需要
      * @param registry
      */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/"); //访问 localhost:8080/templates/admin/index.html
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
-        super.addResourceHandlers(registry);
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+////        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/"); //访问 localhost:8080/templates/admin/index.html
+//        registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
+//        super.addResourceHandlers(registry);
+//    }
 }
 
 

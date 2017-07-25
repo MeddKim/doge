@@ -10,9 +10,9 @@ import org.springframework.context.ApplicationContext;
  * @Description:
  */
 @SpringBootApplication
-public class Application {
+public class SecurityApplication {
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(Application.class, args);
+        ApplicationContext context = SpringApplication.run(SecurityApplication.class, args);
         System.out.println("----------------记录bean开始--------------------");
         String[] beanNames =  context.getBeanDefinitionNames();
         System.out.println("所以beanNames个数："+beanNames.length);
