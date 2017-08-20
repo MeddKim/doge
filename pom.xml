@@ -35,5 +35,6 @@
     <module>doge.security</module>
     <module>doge.api</module>
     <module>doge.file</module>
+    <module>doge.redis</module>
   </modules>
 </project>

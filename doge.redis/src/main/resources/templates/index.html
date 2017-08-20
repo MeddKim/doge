@@ -5,22 +5,6 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
     <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
-    <script>
-        $("#log").click(function(){
-            var data = {"name":"zhang","password":"111"};
-            $.ajax({
-                type: 'POST',
-                url: "/login",
-                data: data,
-                success: function(){
-                    
-                },
-                dataType: function () {
-                    
-                }
-            })
-        });
-    </script>
 </head>
 <body>
 <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
@@ -37,7 +21,25 @@
 <ul>
     <li>访问 <a href="/user/index" th:href="@{/user/index}">已认证页面</a></li>
 
-    <button id="log">模拟登录</button>
+    <button class="log">模拟登录</button>
 </ul>
+<script>
+    console.log($);
+    $(".log").click(function(){
+        console.log("哈哈哈");
+        var data = {"name":"zhang","password":"111"};
+        $.ajax({
+            type: 'POST',
+            url: "/login",
+            data: data,
+            success: function(){
+
+            },
+            dataType: function () {
+
+            }
+        })
+    });
+</script>
 </body>
 </html>
