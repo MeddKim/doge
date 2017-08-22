@@ -21,8 +21,8 @@ public class CustomUserService implements UserDetailsService{
     private ISysUsersService sysUsersService;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        SysUsers user = sysUsersService.findUserByName(name);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        SysUsers user = sysUsersService.findUserByName(username);
 
         if(null == user){
             throw new UsernameNotFoundException("用户名不存在");

@@ -1,30 +1,20 @@
 package com.security.controller;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
+import com.security.utils.HttpCode;
+import com.security.utils.ResultMapUtils;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by Meddkim on 2017/8/20.
+ * Created by Meddkim on 2017/8/22.
  */
-@Slf4j
-@Controller
+@RestController
 public class LoginController {
 
-//    @RequestMapping(value = "/login",method = RequestMethod.GET)
-//    public String login(){
-//        return "login";
-//    }
+    @RequestMapping("/login-success")
+    public Object loginSuccess() {
+        return ResultMapUtils.successResult("登录成功");
+    }
 
-//    @RequestMapping("/login-error")
-//    public String loginError() {
-//        log.info("登录失败");
-//        return "loginError";
-//    }
-//
-//    @RequestMapping("/loginSuccess")
-//    public String loginSuccess(){
-//        return "loginSuccess";
-//    }
 }
