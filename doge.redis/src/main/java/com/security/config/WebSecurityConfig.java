@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CustomSecurityInterceptor CustomSecurityInterceptor(){
-        UsernamePasswordAuthenticationFil     ter
+//        UsernamePasswordAuthenticationFil     ter
         CustomSecurityInterceptor interceptor = new CustomSecurityInterceptor();
         return interceptor;
     }
