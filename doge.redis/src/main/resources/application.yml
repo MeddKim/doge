@@ -1,25 +1,53 @@
+# 主数据源
 spring:
     datasource:
-        name: test
-        url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
-        username: root
-        password: meddkim
-        # 使用druid数据源
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        filters: stat
-        maxActive: 20
-        initialSize: 1
-        maxWait: 60000
-        minIdle: 1
-        timeBetweenEvictionRunsMillis: 60000
-        minEvictableIdleTimeMillis: 300000
-        validationQuery: select 'x'
-        testWhileIdle: true
-        testOnBorrow: false
-        testOnReturn: false
-        poolPreparedStatements: true
-        maxOpenPreparedStatements: 20
+      type: com.zaxxer.hikari.HikariDataSource  #com.zaxxer.hikari.0x7fffffff;
+      name: HikariDataSource0
+      url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: meddkim
+      driver-class-name: com.mysql.jdbc.Driver
+      hikari:
+        maximum-pool-size: 10
+        leak-detection-threshold: 16000
+        connection-timeout: 30000
+
+custom:
+  datasource:
+    names: ds1,ds2
+  ds1:
+    name: HikariDataSource1
+    url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: meddkim
+    driver-class-name: com.mysql.jdbc.Driver
+  ds2:
+    name: HikariDataSource2
+    url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: meddkim
+    driver-class-name: com.mysql.jdbc.Driver
+
+#        name: test
+#        url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
+#        username: root
+#        password: meddkim
+#        # 使用druid数据源
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        filters: stat
+#        maxActive: 20
+#        initialSize: 1
+#        maxWait: 60000
+#        minIdle: 1
+#        timeBetweenEvictionRunsMillis: 60000
+#        minEvictableIdleTimeMillis: 300000
+#        validationQuery: select 'x'
+#        testWhileIdle: true
+#        testOnBorrow: false
+#        testOnReturn: false
+#        poolPreparedStatements: true
+#        maxOpenPreparedStatements: 20
     thymeleaf:
         cache: false
     redis:
@@ -43,7 +71,6 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.security.domain
   config-location: classpath:mybatis/mybatis-config.xml
-
 #mybatis:
 #  mapper-locations: classpath:mybatis/mapper/*.xml
 #  type-aliases-package: com.security.domain

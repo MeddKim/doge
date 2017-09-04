@@ -23,6 +23,9 @@ public class RedisTest {
     @Autowired
     private ISysUsersService sysUsersService;
 
+    @Autowired
+    private SysUsersMapper sysUsersMapper;
+
     @Test
     public void getValue(){
         String bar = redisService.get("name");
@@ -45,6 +48,12 @@ public class RedisTest {
     @Test
     public void test2(){
         SysUsers user = sysUsersService.findUserByName("zhang");
+        System.out.println(user.getPassword());
+    }
+
+    @Test
+    public void test3(){
+        SysUsers user = sysUsersMapper.selectUserByName("zhang");
         System.out.println(user.getPassword());
     }
 }
