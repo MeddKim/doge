@@ -26,21 +26,22 @@ public class CustomSecurityInterceptor implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        try {
-            HttpServletRequest myrequest = (HttpServletRequest) request;
-            if (myrequest.getSession().getAttribute("loginUser") == null) {
-//                ResponseJsonUtil.jsonResponse(response, "F0001");
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("code",302);
-                jsonObject.addProperty("data","登录失败");
-                ResponseJsonUtil.jsonResponse(response, jsonObject);
-            } else {
-                chain.doFilter(request, response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        }
+//        try {
+//            HttpServletRequest myrequest = (HttpServletRequest) request;
+//            if (myrequest.getSession().getAttribute("loginUser") == null) {
+////                ResponseJsonUtil.jsonResponse(response, "F0001");
+//                JsonObject jsonObject = new JsonObject();
+//                jsonObject.addProperty("code",302);
+//                jsonObject.addProperty("data","登录失败");
+//                ResponseJsonUtil.jsonResponse(response, jsonObject);
+//            } else {
+//                chain.doFilter(request, response);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//        }
+        chain.doFilter(request,response);
     }
     @Override
     public void init(FilterConfig arg0) throws ServletException {

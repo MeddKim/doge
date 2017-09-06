@@ -15,17 +15,17 @@ import java.io.IOException;
  */
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
-            throws IOException, ServletException {
-        if ("application/json".equals(request.getHeader("Content-Type"))) {
-
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("code",200);
-            jsonObject.addProperty("data","登录成功！！！！");
-
-            ResponseJsonUtil.jsonResponse(response,jsonObject);
-        } else {
-            super.onAuthenticationSuccess(request, response, auth);
-        }
-    }
+//    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
+//            throws IOException, ServletException {
+//        if ("application/json".equals(request.getHeader("Content-Type"))) {
+//
+//            JsonObject jsonObject = new JsonObject();
+//            jsonObject.addProperty("code",200);
+//            jsonObject.addProperty("data","登录成功！！！！");
+//
+//            ResponseJsonUtil.jsonResponse(response,jsonObject);
+//        } else {
+//            super.onAuthenticationSuccess(request, response, auth);
+//        }
+//    }
 }

@@ -15,18 +15,18 @@ spring:
 custom:
   datasource:
     names: ds1,ds2
-  ds1:
-    name: HikariDataSource1
-    url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: meddkim
-    driver-class-name: com.mysql.jdbc.Driver
-  ds2:
-    name: HikariDataSource2
-    url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: meddkim
-    driver-class-name: com.mysql.jdbc.Driver
+    ds1:
+      name: HikariDataSource1
+      url: jdbc:mysql://118.190.74.13:3306/shiro1?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: meddkim
+      driver-class-name: com.mysql.jdbc.Driver
+    ds2:
+      name: HikariDataSource2
+      url: jdbc:mysql://118.190.74.13:3306/shiro3?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: meddkim
+      driver-class-name: com.mysql.jdbc.Driver
 
 #        name: test
 #        url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
