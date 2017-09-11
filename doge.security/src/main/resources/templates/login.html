@@ -4,6 +4,7 @@
     <title>登陆页</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
 </head>
 <body>
 <h1>登陆页</h1>
@@ -17,5 +18,26 @@
     <input type="submit" value="Log in" />
 </form>
 <p><a href="/index" th:href="@{/index}">返回home页面</a></p>
+
+<button class="log">模拟登录</button>
+
+<script>
+    console.log($);
+    $(".log").click(function(){
+        console.log("哈哈哈");
+        var data = {"name":"zhang","password":"111"};
+        $.ajax({
+            type: 'POST',
+            url: "/login",
+            data: data,
+            success: function(){
+
+            },
+            dataType: function () {
+
+            }
+        })
+    });
+</script>
 </body>
 </html>

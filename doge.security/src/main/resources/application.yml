@@ -1,7 +1,7 @@
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://118.190.74.13:3306/demo?useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://118.190.74.13:3306/shiro?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: meddkim
         # 使用druid数据源
@@ -32,5 +32,10 @@ logging:
     root: WARN
     org.springframework.web: INFO
     org.springframework.security: INFO
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.security.domain
+  config-location: classpath:mybatis/mybatis-config.xml
 
 

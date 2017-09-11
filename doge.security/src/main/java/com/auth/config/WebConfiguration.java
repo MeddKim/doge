@@ -1,8 +1,10 @@
-package com.security.config;
+package com.auth.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * @author: Meddkim
@@ -12,17 +14,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
-    /**
+
      @Bean
      public InternalResourceViewResolver resolver(){
      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-     //        resolver.setViewClass();
-     //        resolver.setPrefix("templates/");
-     resolver.setSuffix(".html");
-     return resolver;
+//          resolver.setViewClass();
+          resolver.setPrefix("templates/");
+          resolver.setSuffix(".html");
+          return resolver;
      }
 
-
+     /**
      @Override
      public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
      configurer.enable();
