@@ -33,7 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 /******静态资源和首页无需权限********/
                 .antMatchers("/css/**","/index").permitAll()
                 /**URL以/user开头需要拥有USER角色**/
-//                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/employee/**").hasRole("employee")
                 .antMatchers("/user/**").authenticated()
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login-error")
@@ -60,7 +61,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .inMemoryAuthentication()
 //                .withUser("user").password("password").roles("USER");
         auth.userDetailsService(customUserService());
-
     }
 
     @Bean

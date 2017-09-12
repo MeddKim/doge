@@ -16,20 +16,17 @@ import org.springframework.stereotype.Service;
 public class SysUsersServiceImpl implements ISysUsersService{
 
     @Autowired
-    private SqlSession sqlSession;
+    private SysUsersMapper sysUsersMapper;
 
     @Override
     public SysUsers findUserByPrimaryKey(Long id) {
 
         log.info("查询用户ID为{}的用户",id);
-
-        SysUsersMapper sysUsersMapper = sqlSession.getMapper(SysUsersMapper.class);
         return sysUsersMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public SysUsers findUserByName(String name) {
-        SysUsersMapper sysUsersMapper = sqlSession.getMapper(SysUsersMapper.class);
         return sysUsersMapper.selectUserByName(name);
     }
 }
