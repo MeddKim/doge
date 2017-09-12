@@ -1,5 +1,8 @@
 package com.auth.controller;
 
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

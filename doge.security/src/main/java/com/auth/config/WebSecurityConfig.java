@@ -1,9 +1,6 @@
 package com.auth.config;
 
-import com.auth.security.CustomAuthenticationEntryPoint;
-import com.auth.security.CustomAuthenticationFailureHandler;
-import com.auth.security.CustomAuthenticationFilter;
-import com.auth.security.CustomAuthenticationSuccessHandler;
+import com.auth.security.*;
 import com.auth.service.impl.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //设置未登录时的提示信息
                 .and().exceptionHandling()
-                .authenticationEntryPoint(customAuthenticationEntryPoint()).and()
+                .authenticationEntryPoint(customAuthenticationEntryPoint())
+                .accessDeniedHandler(customAccessDeniedHandler())
+                .and()
                 .httpBasic();
 
         //关闭csrf
@@ -60,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth
 //                .inMemoryAuthentication()
 //                .withUser("user").password("password").roles("USER");
+
         auth.userDetailsService(customUserService());
     }
 
@@ -78,6 +78,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CustomAuthenticationEntryPoint customAuthenticationEntryPoint(){
         return new CustomAuthenticationEntryPoint();
+    }
+
+    public CustomAccessDeniedHandler customAccessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
     }
 }
 
