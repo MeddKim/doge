@@ -3,8 +3,9 @@ package com.auth.service.impl;
 import com.auth.domain.SysRoles;
 import com.auth.mapper.SysRolesMapper;
 import com.auth.service.ISysRolesService;
+import com.auth.utils.PaginationUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,5 +20,12 @@ public class SysRolesServiceImpl implements ISysRolesService {
     @Override
     public List<SysRoles> findByParams(Map<String, Object> params) {
         return sysRolesMapper.findByParams(params);
+    }
+
+    @Override
+    public List<SysRoles> findByParams(Map<String, Object> params, RowBounds rowBounds) {
+        return PaginationUtils.isPagination(rowBounds) ?
+                sysRolesMapper.findByParams(params,rowBounds):
+                sysRolesMapper.findByParams(params);
     }
 }
