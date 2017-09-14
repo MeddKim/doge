@@ -8,4 +8,5 @@ import com.auth.domain.SysUsers;
 public interface ISysUsersService {
     SysUsers findUserByPrimaryKey(Long id);
     SysUsers findUserByName(String name);
+    int saveUser(SysUsers user);
 }

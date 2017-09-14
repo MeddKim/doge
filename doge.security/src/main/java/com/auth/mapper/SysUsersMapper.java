@@ -11,4 +11,5 @@ public interface SysUsersMapper {
 
     SysUsers selectByPrimaryKey(Long id);
     SysUsers selectUserByName(String username);
+    int insert(SysUsers user);
 }

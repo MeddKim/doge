@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,9 @@ public class CustomUserService implements UserDetailsService{
     private ISysUsersRolesService sysUsersRolesService;
     @Autowired
     private ISysRolesService sysRolesService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
@@ -61,6 +65,6 @@ public class CustomUserService implements UserDetailsService{
             System.out.println(role.getName());
         }
         * */
-        return new User(user.getUsername(),user.getPassword(),authorities);
+        return new User(user.getUsername(),user.getPassword().trim(),authorities);
     }
 }

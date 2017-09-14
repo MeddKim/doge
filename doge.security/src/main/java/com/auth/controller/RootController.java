@@ -1,9 +1,13 @@
 package com.auth.controller;
 
 import com.auth.domain.SysRoles;
+import com.auth.domain.SysUsers;
 import com.auth.service.ISysRolesService;
+import com.auth.service.ISysUsersService;
 import com.auth.utils.PaginationList;
 import com.auth.utils.PaginationUtils;
+import com.auth.utils.ResultMapUtils;
+import com.auth.utils.UUIDUtils;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import lombok.Data;
@@ -14,6 +18,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +35,10 @@ public class RootController {
 
     @Autowired
     private ISysRolesService sysRolesService;
+    @Autowired
+    ISysUsersService iSysUsersService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/user/test")
     public String userTest() {
@@ -73,5 +84,22 @@ public class RootController {
         private Long id;
         private String role;
         private String description;
+    }
+
+    @RequestMapping("/register")
+    public Object register(@RequestBody SysUsers user){
+        if(StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())){
+            return ResultMapUtils.errorResult(331,"用户名或密码不能为空");
+        }
+
+        if(null != iSysUsersService.findUserByName(user.getUsername())){
+            return ResultMapUtils.errorResult(331,"该用户已经存在");
+        }
+        user.setSalt(UUIDUtils.uuid());
+        user.setPassword(passwordEncoder.encode(user.getPassword().trim()));
+
+        iSysUsersService.saveUser(user);
+
+        return ResultMapUtils.successResult("创建成功");
     }
 }

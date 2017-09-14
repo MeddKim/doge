@@ -12,6 +12,32 @@
     id, username, password, salt, locked
   </sql>
 
+  <insert id="insert" parameterType="com.auth.domain.SysUsers">
+    INSERT INTO sys_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="username != null">
+          username,
+        </if>
+        <if test="password != null">
+          password,
+        </if>
+        <if test="salt != null">
+          salt,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username},
+      </if>
+      <if test="password != null">
+        #{password},
+      </if>
+      <if test="salt != null">
+        #{salt},
+      </if>
+    </trim>
+  </insert>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     SELECT
       <include refid="Base_Column_List"/>
