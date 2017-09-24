@@ -1,10 +1,14 @@
 import com.doge.blog.domain.Content;
 import com.doge.blog.domain.Mapping;
+import com.doge.blog.domain.dto.MappingDetailDto;
 import com.doge.blog.mapper.ContentMapper;
+import com.doge.blog.mapper.MappingMapper;
 import com.doge.blog.mapper.anno.ComtentMapper2;
 import com.doge.blog.service.ArticleService;
 import com.doge.blog.service.impl.ArticleServiceImpl;
+import com.google.common.collect.Maps;
 import org.apache.ibatis.session.SqlSession;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Administrator
@@ -23,69 +28,24 @@ import java.util.List;
 //@Import(Application.class)
 public class BootTest {
 
-    @Autowired
-    private SqlSession session;
 
     @Autowired
-    private ComtentMapper2 contentMapper2;
-
-//    @Autowired
-//    private ArticleServiceImpl articleService;
-
+    private MappingMapper mappingMapper;
 
     @Test
-    public void test(){
-        Content content = contentMapper2.selectByPrimaryKey(1L);
-        System.out.println(content.getTitle());
-    }
+    public void mappingMapperTest(){
 
-    @Test
-    public void test2(){
-//        try{
-//            ContentMapper contentMaper = session.getMapper(ContentMapper.class);
-//            Content content = contentMapper.selectByPrimaryKey(1L);
-//            System.out.println(content.getTitle());
-//        }finally {
-//            session.close();
-//        }
-        //上面的代码错误，在spring中，我们无需手动关闭SqlSession，关闭操作由Spring替我们完成
-            ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-            Content content = contentMapper.selectByPrimaryKey(1L);
-            System.out.println(content.getText());
-    }
+        Map<String,Object> params = Maps.newHashMap();
+        List<Long> list = Lists.newArrayList();
+        list.add(1L);
+        params.put("contentIds",list);
 
-    @Test
-    public void test3(){
-//        try{
-//            ContentMapper contentMaper = session.getMapper(ContentMapper.class);
-//            Content content = contentMapper.selectByPrimaryKey(1L);
-//            System.out.println(content.getTitle());
-//        }finally {
-//            session.close();
-//        }
-        //上面的代码错误，在spring中，我们无需手动关闭SqlSession，关闭操作由Spring替我们完成
-        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-        Content content = contentMapper.selectContentMappingById(1L);
-        System.out.println(content.getMappings().size());
+        List<MappingDetailDto> mappingDetailDtos = mappingMapper.findWithTaxoInfo(params);
 
-        for(Mapping mp : content.getMappings()){
-            System.out.println(mp.getTaxonomyId());
-        }
-    }
+        System.out.println(mappingDetailDtos.size());
 
-    @Test
-    public void test4(){
-        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-        List<Content> contents = contentMapper.selectContentList();
-        System.out.println(contents.size());
-        System.out.println(contents.get(0).getMappings().size());
-    }
-
-    @Test
-    public void test5(){
-        ArticleService articleService = new ArticleServiceImpl();
-        List<Content> contents = articleService.findContentPage();
-        System.out.println(contents.size());
-        System.out.println(contents.get(0).getMappings().size());
+        mappingDetailDtos.forEach( mappingDetailDto -> {
+            System.out.println(mappingDetailDto.getContentId());
+        });
     }
 }

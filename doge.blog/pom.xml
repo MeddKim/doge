@@ -28,22 +28,15 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.0.28</version>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>2.6.3</version>
     </dependency>
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>4.2.1</version>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>com.jfinal</groupId>
-      <artifactId>doge.jfinal</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    -->
     <dependency>
       <groupId>org.mybatis.spring.boot</groupId>
       <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -54,7 +47,11 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.8.8.1</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>23.0</version>
+    </dependency>
     <!--<dependency>-->
       <!--<groupId>com.google.code.gson</groupId>-->
       <!--<artifactId>gson</artifactId>-->
@@ -77,15 +74,11 @@
       <!--<version>1.3.5</version>-->
     <!--</dependency>-->
     <dependency>
-      <groupId>doge</groupId>
-      <artifactId>doge.api</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+      <scope>provided</scope>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>com.jamxin</groupId>-->
-      <!--<artifactId>jamxin-api</artifactId>-->
-      <!--<version>1.0.0</version>-->
-    <!--</dependency>-->
   </dependencies>
 
   <build>
@@ -120,6 +113,15 @@
         <!--<groupId>org.springframework.boot</groupId>-->
         <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
       <!--</plugin>-->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

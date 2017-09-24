@@ -50,15 +50,28 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, title, text, summary, link_to, markdown_enable, thumbnail, module, style, user_id, 
+    id, title, summary, link_to, markdown_enable, thumbnail, module, style, user_id,
     author, user_email, user_ip, user_agent, parent_id, object_id, order_number, status, 
     vote_up, vote_down, rate, rate_count, price, comment_status, comment_count, comment_time, 
     view_count, created, modified, slug, flag, lng, lat, meta_keywords, meta_description, 
     remarks
   </sql>
+  <sql id="Blob_Column_list">
+    text
+  </sql>
+
+  <sql id="content_include_if_sql">
+
+  </sql>
+  <sql id="content_include_order_sql">
+
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_list"/>
     from blog_content
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -483,6 +496,16 @@
     bc.remarks, bm.id, bm.content_id, bm.taxonomy_id FROM blog_content bc LEFT JOIN blog_mapping bm ON bc.id = bm.content_id
   </select>
 
+
+  <select id="findByParams" resultType="com.doge.blog.domain.Content">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM blog_content
+    <where>
+      <include refid="content_include_if_sql"/>
+    </where>
+      <include refid="content_include_order_sql"/>
+  </select>
 
   <cache />
 </mapper>

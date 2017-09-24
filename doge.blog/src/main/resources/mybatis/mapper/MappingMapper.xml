@@ -6,9 +6,12 @@
     <result column="content_id" jdbcType="BIGINT" property="contentId" />
     <result column="taxonomy_id" jdbcType="BIGINT" property="taxonomyId" />
   </resultMap>
+
+
   <sql id="Base_Column_List">
     id, content_id, taxonomy_id
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -19,12 +22,15 @@
     delete from blog_mapping
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.doge.blog.domain.Mapping">
     insert into blog_mapping (id, content_id, taxonomy_id
       )
     values (#{id,jdbcType=BIGINT}, #{contentId,jdbcType=BIGINT}, #{taxonomyId,jdbcType=BIGINT}
       )
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.doge.blog.domain.Mapping">
     insert into blog_mapping
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -62,11 +68,81 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
   <update id="updateByPrimaryKey" parameterType="com.doge.blog.domain.Mapping">
     update blog_mapping
     set content_id = #{contentId,jdbcType=BIGINT},
       taxonomy_id = #{taxonomyId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <!--关联查询演示1-->
+  <resultMap id="TaxonomyAliasResultMap" type="com.doge.blog.domain.dto.MappingDetailDto">
+    <id property="id" column="m_id"/>
+    <result property="contentId" column="m_content_id"/>
+    <association property="taxonomy" javaType="com.doge.blog.domain.Taxonomy">
+      <id column="t_id" jdbcType="BIGINT" property="id" />
+      <result column="t_title" jdbcType="VARCHAR" property="title" />
+      <result column="t_slug" jdbcType="VARCHAR" property="slug" />
+      <result column="t_type" jdbcType="VARCHAR" property="type" />
+      <result column="t_icon" jdbcType="VARCHAR" property="icon" />
+      <result column="t_content_module" jdbcType="VARCHAR" property="contentModule" />
+      <result column="t_content_count" jdbcType="INTEGER" property="contentCount" />
+      <result column="t_order_number" jdbcType="INTEGER" property="orderNumber" />
+      <result column="t_parent_id" jdbcType="BIGINT" property="parentId" />
+      <result column="t_object_id" jdbcType="BIGINT" property="objectId" />
+      <result column="t_flag" jdbcType="VARCHAR" property="flag" />
+      <result column="t_lat" jdbcType="DECIMAL" property="lat" />
+      <result column="t_lng" jdbcType="DECIMAL" property="lng" />
+      <result column="t_meta_keywords" jdbcType="VARCHAR" property="metaKeywords" />
+      <result column="t_meta_description" jdbcType="VARCHAR" property="metaDescription" />
+      <result column="t_created" jdbcType="TIMESTAMP" property="created" />
+    </association>
+  </resultMap>
+
+  <sql id="Base_Alias_Columns">
+    m.id          AS 'm_id',
+    m.content_id  AS 'm_content_id',
+    m.taxonomy_id AS 'm_taxonomy_id'
+  </sql>
+
+  <sql id="Taxo_Alias_Columns">
+     t.id                            AS 't_id',
+     t.title                         AS 't_title',
+     t.slug                          AS 't_slug',
+     t.type                          AS 't_type',
+     t.icon                          AS 't_icon',
+     t.content_module                AS 't_content_module',
+     t.content_count                 AS 't_content_count',
+     t.order_number                  AS 't_order_number',
+     t.parent_id                     AS 't_parent_id',
+     t.object_id                     AS 't_object_id',
+     t.flag                          AS 't_flag',
+     t.lat                           AS 't_lat',
+     t.lng                           AS 't_lng',
+     t.meta_keywords                 AS 't_meta_keywords',
+     t.meta_description              AS 't_meta_description',
+     t.created                       AS 't_created'
+  </sql>
+
+  <select id="findWithTaxoInfo" resultMap="TaxonomyAliasResultMap" parameterType="map">
+    SELECT 
+      <include refid="Base_Alias_Columns"></include>
+    ,
+      <include refid="Taxo_Alias_Columns"></include>
+    FROM blog_mapping m, blog_taxonomy t
+    <where>
+      m.taxonomy_id = t.id
+      <if test="contentIds != null">
+        AND m.content_id IN
+        <foreach collection="contentIds" open="(" close=")" index="index" item="item" separator=",">
+            #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
   <cache />
 </mapper>
