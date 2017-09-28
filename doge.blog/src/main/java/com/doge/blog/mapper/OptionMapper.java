@@ -1,7 +1,9 @@
 package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Option;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OptionMapper {
     int deleteByPrimaryKey(Long id);
 

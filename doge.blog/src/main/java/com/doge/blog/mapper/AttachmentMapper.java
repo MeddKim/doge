@@ -1,7 +1,9 @@
 package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Attachment;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AttachmentMapper {
     int deleteByPrimaryKey(Long id);
 

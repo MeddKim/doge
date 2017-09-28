@@ -28,9 +28,9 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.0.28</version>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>2.6.3</version>
     </dependency>
     <dependency>
       <groupId>com.github.pagehelper</groupId>
@@ -56,11 +56,38 @@
     </dependency>
 
     <dependency>
-      <groupId>doge</groupId>
-      <artifactId>doge.api</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>23.0</version>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.google.code.gson</groupId>-->
+      <!--<artifactId>gson</artifactId>-->
+      <!--<version>2.8.0</version>-->
+    <!--</dependency>-->
+    <!--
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    为了配合thymeleaf.mode=LEGACYHTML5（使用非严格的html5格式）而添加的文件
+    <dependency>
+      <groupId>net.sourceforge.nekohtml</groupId>
+      <artifactId>nekohtml</artifactId>
+      <version>1.9.22</version>
+    </dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.mybatis.generator</groupId>-->
+      <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+      <!--<version>1.3.5</version>-->
+    <!--</dependency>-->
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -103,6 +130,15 @@
         <!--<groupId>org.springframework.boot</groupId>-->
         <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
       <!--</plugin>-->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

@@ -1,9 +1,11 @@
 package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Taxonomy;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TaxonomyMapper {
     int deleteByPrimaryKey(Long id);
 

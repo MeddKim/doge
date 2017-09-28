@@ -1,7 +1,9 @@
 package com.doge.blog.mapper;
 
 import com.doge.blog.domain.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 

@@ -1,7 +1,9 @@
 package com.doge.blog.mapper;
 
 import com.doge.blog.domain.Metadata;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MetadataMapper {
     int deleteByPrimaryKey(Long id);
 

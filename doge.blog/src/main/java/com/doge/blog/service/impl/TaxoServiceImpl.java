@@ -18,11 +18,10 @@ import java.util.List;
 public class TaxoServiceImpl implements TaxoService{
 
     @Autowired
-    private SqlSession session;
+    private TaxonomyMapper taxoMapper;
 
     @Override
     public List<Taxonomy> findTaxos() {
-        TaxonomyMapper taxoMapper = session.getMapper(TaxonomyMapper.class);
         List<Taxonomy> contents = taxoMapper.selectTaxoList();
         return contents;
     }
