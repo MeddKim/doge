@@ -20,7 +20,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        response.getWriter().println("{\"ok\":0,\"msg\":\""+authException.getLocalizedMessage()+"\"}");
+        response.getWriter().println("{\"ok\":0,\"api\":\""+authException.getLocalizedMessage()+"\"}");
         response.getWriter().flush();
         response.getWriter().close();
     }

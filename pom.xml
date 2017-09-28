@@ -36,5 +36,6 @@
     <module>doge.api</module>
     <module>doge.file</module>
     <module>doge.redis</module>
+    <module>doge.message</module>
   </modules>
 </project>
