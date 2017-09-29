@@ -6,7 +6,6 @@ import com.corundumstudio.socketio.listener.DataListener;
 import com.doge.message.socketio.service.PushWebMessageService;
 import com.doge.message.socketio.utils.ServerHolder;
 import com.doge.message.socketio.utils.ServerInfo;
-import com.doge.msg.socketio.ChatObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -53,28 +52,21 @@ public class PushWebMessageServiceImpl implements PushWebMessageService {
         serverInfo.getServer().start();
 
         ServerHolder.add(serverInfo);
-        serverInfo.getServer().addConnectListener(new ConnectListener() {
+
+
+        ServerHolder.addNamespace("testServer","/chat1").addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient socketIOClient) {
-                System.out.println("连接上了------服务提示");
+                System.out.println("连接上");
             }
         });
 
-        serverInfo.getServer().addNamespace("/chart1").addConnectListener(new ConnectListener() {
+        ServerHolder.addNamespace("testServer","/chat2").addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient socketIOClient) {
-                System.out.println("连接上了-----命名空间提示");
+                System.out.println("连接上");
             }
         });
-
-        serverInfo.getServer().addNamespace("/chart2").addConnectListener(new ConnectListener() {
-            @Override
-            public void onConnect(SocketIOClient socketIOClient) {
-                System.out.println("连接上了-----命名空间提示");
-            }
-        });
-
-
     }
 
     @Override

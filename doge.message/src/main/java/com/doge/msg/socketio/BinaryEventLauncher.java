@@ -6,6 +6,7 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.listener.DataListener;
 
 public class BinaryEventLauncher {
@@ -20,10 +21,10 @@ public class BinaryEventLauncher {
 
         final SocketIOServer server = new SocketIOServer(config);
 
-        server.addEventListener("api", byte[].class, new DataListener<byte[]>() {
+        server.addEventListener("msg", byte[].class, new DataListener<byte[]>() {
             @Override
             public void onData(SocketIOClient client, byte[] data, AckRequest ackRequest) {
-                client.sendEvent("api", data);
+                client.sendEvent("msg", data);
             }
         });
 

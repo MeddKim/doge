@@ -1,13 +1,31 @@
 package com.doge.msg.socketio;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ChatObject {
+
     private String userName;
     private String message;
+
+    public ChatObject() {
+    }
+
+    public ChatObject(String userName, String message) {
+        super();
+        this.userName = userName;
+        this.message = message;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 }
