@@ -1,4 +1,4 @@
-package com.doge.api.socketio;
+package com.doge.msg.socketio;
 
 import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.AckRequest;

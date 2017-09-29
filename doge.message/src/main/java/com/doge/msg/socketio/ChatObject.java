@@ -1,4 +1,4 @@
-package com.doge.api.socketio;
+package com.doge.msg.socketio;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

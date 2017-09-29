@@ -1,6 +1,7 @@
-package com.doge.api.socketio;
+package com.doge.msg.socketio;
 
 import com.corundumstudio.socketio.*;
+import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 
 public class NamespaceChatLauncher {
@@ -25,6 +26,27 @@ public class NamespaceChatLauncher {
             public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest){
                 //broadcast message to all client
                 chat1namespace.getBroadcastOperations().sendEvent("message",data);
+            }
+        });
+
+        server.addConnectListener(new ConnectListener() {
+            @Override
+            public void onConnect(SocketIOClient socketIOClient) {
+                System.out.println("连接上了");
+            }
+        });
+
+        chat2namespace.addConnectListener(new ConnectListener() {
+            @Override
+            public void onConnect(SocketIOClient socketIOClient) {
+                System.out.println("连上了");
+            }
+        });
+
+        chat1namespace.addConnectListener(new ConnectListener() {
+            @Override
+            public void onConnect(SocketIOClient socketIOClient) {
+                System.out.println("连上了");
             }
         });
 
