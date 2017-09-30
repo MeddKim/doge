@@ -6,6 +6,8 @@ import com.corundumstudio.socketio.listener.DataListener;
 import com.doge.message.socketio.service.PushWebMessageService;
 import com.doge.message.socketio.utils.ServerHolder;
 import com.doge.message.socketio.utils.ServerInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -71,8 +73,16 @@ public class PushWebMessageServiceImpl implements PushWebMessageService {
 
     @Override
     public void pushTestMsg() {
-        ServerHolder.namespaceMap.get("/chat1").getBroadcastOperations().sendEvent("message","你好世界");
+        ServerHolder.namespaceMap.get("/chat1").getBroadcastOperations().sendEvent("message",new Member("张三",15,"测试人员"));
         ServerHolder.serverMap.get("testServer").getServer().getBroadcastOperations().sendEvent("messsage");
         System.out.println(ServerHolder.serverMap.get("testServer").getServer().getAllClients().size());
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class Member{
+        private String name;
+        private Integer age;
+        private String desc;
     }
 }
