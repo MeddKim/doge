@@ -19,6 +19,7 @@ public class Producter {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        /**验证Direct Exchange**/
         channel.exchangeDeclare("DirectExchange", BuiltinExchangeType.DIRECT,false,false,null);
         channel.queueDeclare("QueuebindToDirectExchange",false,false,false,null);
         channel.queueBind("QueuebindToDirectExchange","DirectExchange","routingKey");

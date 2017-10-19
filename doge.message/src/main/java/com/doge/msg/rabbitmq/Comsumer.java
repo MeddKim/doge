@@ -16,6 +16,8 @@ public class Comsumer {
         factory.setPort(2372);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
+
+
         channel.queueDeclare("QueuebindToDirectExchange", false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         QueueingConsumer consumer = new QueueingConsumer(channel);
