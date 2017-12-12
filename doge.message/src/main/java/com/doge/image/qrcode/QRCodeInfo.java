@@ -15,8 +15,8 @@ public class QRCodeInfo {
     private String character_set = "utf-8";
     private int fontSize = 12;
     private File logoFile;
-    private float logoRatio = 0.20f;
-    private String desc;
+    private float logoRatio = 0.20f;  //log图片比例
+    private String title;
     private int whiteWidth;//白边的宽度
     private int[] bottomStart;//二维码最下边的开始坐标
     private int[] bottomEnd;//二维码最下边的结束坐标

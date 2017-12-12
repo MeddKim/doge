@@ -1,5 +1,7 @@
 package com.doge.image.qrcode;
 
+import ch.qos.logback.core.util.FileUtil;
+import com.google.common.base.Strings;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -22,6 +24,11 @@ public class QRCodeUtils {
     private static int BLACK = 0x000000;
     private static int WHITE = 0xFFFFFF;
 
+    /**
+     * 创建二维码数据部分
+     * @param codeInfo
+     * @return
+     */
     private BufferedImage createQRCode(QRCodeInfo codeInfo){
         String contents = codeInfo.getContents();
         int width = codeInfo.getWidth();
@@ -53,11 +60,15 @@ public class QRCodeUtils {
     }
 
     public void createQRCode(QRCodeInfo codeInfo, OutputStream output){
+        //二维码部分
         BufferedImage bm = createQRCode(codeInfo);
+        Graphics g = bm.getGraphics();
+        //log存在计算log图片相关数据
         File logoFile = codeInfo.getLogoFile();
-        if(logoFile!=null && logoFile.exists()){
-            try{
+        if(null != logoFile && logoFile.exists()){
+            try {
                 BufferedImage logoImg = ImageIO.read(logoFile);
+                //获取logo图大小，根据比例缩放
                 int logoWidth = logoImg.getWidth();
                 int logoHeight = logoImg.getHeight();
                 int width = bm.getWidth();
@@ -67,72 +78,90 @@ public class QRCodeUtils {
                     logoWidth = logoWidth>width*ratio ? (int)(width*ratio) : logoWidth;
                     logoHeight = logoHeight>height*ratio ? (int)(height*ratio) : logoHeight;
                 }
+                //在二维码图片中家属Logo图片
                 int x = (width-logoWidth)/2;
                 int y = (height-logoHeight)/2;
-                Graphics g = bm.getGraphics();
+                //绘制log图
                 g.drawImage(logoImg, x, y, logoWidth, logoHeight, null);
-                String desc = codeInfo.getDesc();
-                //int whiteWidth = 8;
-                if(!StringUtils.isEmpty(desc)){
-                    int whiteWidth = codeInfo.getHeight()-codeInfo.getBottomEnd()[1];
-                    Font font = new Font("黑体", Font.BOLD, codeInfo.getFontSize());
-                    int fontHeight = g.getFontMetrics(font).getHeight();
-                    //计算需要多少行
-                    int lineNum = 1;
-                    int currentLineLen = 0;
-                    for(int i=0;i<desc.length();i++){
-                        char c = desc.charAt(i);
-                        int charWidth = g.getFontMetrics(font).charWidth(c);
-                        if(currentLineLen+charWidth>width){
-                            lineNum++;
-                            currentLineLen = 0;
-                            continue;
-                        }
-                        currentLineLen += charWidth;
-                    }
-                    int totalFontHeight = fontHeight*lineNum;
-                    int wordTopMargin = 4;
-                    BufferedImage bm1 = new BufferedImage(width, height+totalFontHeight+wordTopMargin-whiteWidth, BufferedImage.TYPE_INT_RGB);
-                    Graphics g1 = bm1.getGraphics();
-                    if(totalFontHeight+wordTopMargin-whiteWidth>0){
-                        g1.setColor(Color.WHITE);
-                        g1.fillRect(0, height, width, totalFontHeight+wordTopMargin-whiteWidth);
-                    }
-                    g1.setColor(new Color(BLACK));
-                    g1.setFont(font);
-                    g1.drawImage(bm, 0, 0, null);
-                    width = codeInfo.getBottomEnd()[0]-codeInfo.getBottomStart()[0];
-                    height = codeInfo.getBottomEnd()[1]+1;
-                    currentLineLen = 0;
-                    int currentLineIndex = 0;
-                    int baseLo = g1.getFontMetrics().getAscent();
-                    for(int i=0;i<desc.length();i++){
-                        String c = desc.substring(i, i+1);
-                        int charWidth = g.getFontMetrics(font).stringWidth(c);
-                        if(currentLineLen+charWidth>width){
-                            currentLineIndex++;
-                            currentLineLen = 0;
-                            g1.drawString(c, currentLineLen + whiteWidth, height+baseLo+fontHeight*(currentLineIndex)+wordTopMargin);
-                            currentLineLen = charWidth;
-                            continue;
-                        }
-//                        g1.drawString(c, currentLineLen+whiteWidth, height+baseLo+fontHeight*(currentLineIndex) + wordTopMargin);
-                        g1.drawString(c, currentLineLen+whiteWidth, baseLo-fontHeight*(currentLineIndex) - wordTopMargin);
-                        currentLineLen += charWidth;
-                    }
-                    g1.dispose();
-                    bm = bm1;
-                }
-            }catch(Exception e){
-                e.printStackTrace();
+            }catch (Exception e){
+
             }
+
         }
+        //标题存在，计算标题相关数据
+        if(!Strings.isNullOrEmpty(codeInfo.getTitle())){
+            try {
+                String title = codeInfo.getTitle();
+                //计算白边宽度
+                int whiteWidth = codeInfo.getHeight()-codeInfo.getBottomEnd()[1];
+                //生成字体
+                Font font = new Font("黑体", Font.BOLD, codeInfo.getFontSize());
+                int fontHeight = g.getFontMetrics(font).getHeight();
+                //文字内容多需要换行并计算相应数据
+                int lineNum = 1;
+                int currentLineLen = 0;
+                for(int i=0;i<title.length();i++){
+                    char c = title.charAt(i);
+                    int charWidth = g.getFontMetrics(font).charWidth(c);
+                    if(currentLineLen + charWidth> bm.getWidth()){
+                        lineNum++;
+                        currentLineLen = 0;
+                        continue;
+                    }
+                    currentLineLen += charWidth;
+                }
+                //文字内容高度
+                int totalFontHeight = fontHeight*lineNum;   //文字内容高度
+                //设置一个文字下边距
+                int wordBottomMargin = 10;
+                //根据 各部分大小重新设计二维码
+                BufferedImage bm1 = new BufferedImage(codeInfo.getWidth(),
+                        codeInfo.getWidth()+totalFontHeight+wordBottomMargin-whiteWidth,
+                        BufferedImage.TYPE_INT_RGB);
+                Graphics g1 = bm1.getGraphics();
+                //绘制文字区域
+                if(totalFontHeight + wordBottomMargin -whiteWidth > 0){
+                    g1.setColor(Color.WHITE);
+                    g1.fillRect(0,0,codeInfo.getWidth(),totalFontHeight + wordBottomMargin-whiteWidth);
+                }
+                g1.setColor(new Color(BLACK));
+                g1.setFont(font);
+                //绘制原有二维码
+                g1.drawImage(bm, 0, totalFontHeight + wordBottomMargin-whiteWidth, null);
+
+                //绘制文字
+                int width = codeInfo.getBottomEnd()[0]-codeInfo.getBottomStart()[0];
+                currentLineLen = 0;
+                int currentLineIndex = 0;
+                int baseLo = g.getFontMetrics().getAscent();
+                for(int i=0;i<title.length();i++){
+                    String c = title.substring(i, i+1);
+                    int charWidth = g.getFontMetrics(font).stringWidth(c);
+                    if(currentLineLen+charWidth>width){
+                        currentLineIndex++;
+                        currentLineLen = 0;
+                        g1.drawString(c, currentLineLen + whiteWidth, baseLo+fontHeight*(currentLineIndex)+wordBottomMargin);
+                        currentLineLen = charWidth;
+                        continue;
+                    }
+                    g1.drawString(c, currentLineLen + whiteWidth, baseLo+fontHeight*(currentLineIndex)+wordBottomMargin);
+                    currentLineLen += charWidth;
+                }
+                g1.dispose();
+                bm = bm1;
+            }catch (Exception e){
+
+            }
+
+        }
+
         try{
             ImageIO.write(bm, StringUtils.isEmpty(codeInfo.getFormat()) ? codeInfo.getFormat() : codeInfo.getFormat(), output);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+
 
     public void createCodeImage(QRCodeInfo info, File file){
         File parent = file.getParentFile();

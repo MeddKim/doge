@@ -11,12 +11,9 @@ public class Test {
         info.setHeight(400);
         info.setFontSize(24);
         info.setContents("<a href='http://www.sohu.com'>人生就是拼搏</a>");
-        //info.setContents("http://www.sohu.com");
         info.setContents("天涯明月刀");
         info.setLogoFile(new File("D:/VirtualBox/timg.jpg"));
-        info.setDesc("张三李四");
-        //info.setLogoDesc("一叶浮萍归大海，adsasfbhtjg人生何处不相逢");
-        //info.setLogoDesc("一叶浮萍");
+        info.setTitle("张三李四");
         creator.createCodeImage(info, "D:/VirtualBox/dest." + info.getFormat());
     }
 
