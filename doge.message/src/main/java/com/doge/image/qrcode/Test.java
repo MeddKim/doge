@@ -10,8 +10,9 @@ public class Test {
         info.setWidth(400);
         info.setHeight(400);
         info.setFontSize(24);
-        info.setContents("<a href='http://www.sohu.com'>人生就是拼搏</a>");
-        info.setContents("天涯明月刀");
+//        info.setContents("<a href='http://www.sohu.com'>人生就是拼搏</a>");
+//        info.setContents("天涯明月刀");
+        info.setContents("https://www.baidu.com");
         info.setLogoFile(new File("D:/VirtualBox/timg.jpg"));
         info.setTitle("张三李四");
         creator.createCodeImage(info, "D:/VirtualBox/dest." + info.getFormat());
