@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -32,5 +33,14 @@ public class RedisConfig {
     public RedisTemplate<?,?> getRedisTemplate(){
         RedisTemplate<?,?> template = new StringRedisTemplate(getConnectionFactory());
         return template;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.redis")
+    public JedisPool jedisPool(){
+        return new JedisPool(getRedisConfig(),
+                "meddkim.org",
+                2379,
+                5000);
     }
 }
