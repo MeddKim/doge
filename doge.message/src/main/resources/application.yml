@@ -21,7 +21,8 @@ spring:
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
     rabbitmq:
-      host: meddkim.org
+#      host: meddkim.org
+      host: 116.196.75.83
       port: 5672
       username: meddkim
       password: meddkim
