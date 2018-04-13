@@ -48,7 +48,7 @@ public class ApiTokenUtil implements Serializable {
     }
 
     public String refresh(){
-
+        return null;
     }
 
     /**

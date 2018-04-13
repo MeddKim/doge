@@ -32,7 +32,8 @@ public class AuthBiz {
     }
 
     public String refresh(String oldToken){
-        final String token = oldToken.substring(tok)
-        if(oldToken)
+//        final String token = oldToken.substring(tok)
+//        if(oldToken)
+        return null;
     }
 }
